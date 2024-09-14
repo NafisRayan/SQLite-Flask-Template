@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Welcome, {{ username }}!</h2>
+<p>Your Profile:</p>
+<ul>
+    <li>Username: {{ username }}</li>
+    <li>Email: Not shown (for security)</li>
+</ul>
+<a href="{{ url_for('logout') }}">Logout</a>
+{% if flash %}
+<div class="flash">
+    {% if flash.type == 'error' %}
+    <span style="color: red;">{{ flash.message }}</span>
+    {% else %}
+    <span style="color: green;">{{ flash.message }}</span>
+    {% endif %}
+</div>
+{% endif %}
+{% endblock %}
