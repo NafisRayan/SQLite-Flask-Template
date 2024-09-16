@@ -1,21 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Form Menia</title>
     <style>
         body {
-            background-color: #000;
-            color: #fff;
+            background-color: #f0f2f5;
+            color: #000;
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 20px;
         }
 
         nav {
-            background-color: #333;
+            background-color: #1877f2;
             color: #fff;
             padding: 1rem;
             display: flex;
@@ -28,6 +27,7 @@
             margin: 0;
             padding: 0;
             display: flex;
+            justify-content: space-around;
         }
 
         nav li {
@@ -37,10 +37,11 @@
         nav a {
             color: white;
             text-decoration: none;
+            transition: color 0.3s ease;
         }
 
         nav a:hover {
-            color: lightgray;
+            color: #e4e6eb;
         }
 
         footer {
@@ -48,8 +49,8 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background-color: #333;
-            color: white;
+            background-color: #1877f2;
+            color: #fff;
             text-align: center;
             padding: 10px;
         }
@@ -58,7 +59,7 @@
 
 <body>
     <nav>
-        <h2 style="color: #ff0000;">Form Menia</h2>
+        <h2 style="color: #fff; font-size: 24px;">Form Menia</h2>
         <ul>
             {% if session.logged_in %}
             <li><a href="{{ url_for('home') }}">Home</a></li>
@@ -76,9 +77,8 @@
         {% block content %}{% endblock %}
     </div>
 
-    <footer>
+    <footer style="background-color: #1877f2; color: white; text-align: center; padding: 10px;">
         &copy; 2024 Form Menia. All rights reserved.
     </footer>
 </body>
-
 </html>

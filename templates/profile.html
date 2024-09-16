@@ -2,25 +2,23 @@
 
 {% block content %}
 <div style="
-    background-image: url('path/to/gotham-city-background.jpg');
-    background-size: cover;
-    background-position: center;
+    background-color: #f0f2f5;
 ">
-    <h2 style="color: #ff0000; text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5); font-size: 36px;">Welcome, {{ username }}!</h2>
+    <h2 style="color: #1877f2; font-size: 36px;">Welcome, {{ username }}!</h2>
     <p>Your Profile:</p>
-    <ul style="color: #fff; list-style-type: none; padding-left: 0; margin-bottom: 20px;">
+    <ul style="color: #000; list-style-type: none; padding-left: 0; margin-bottom: 20px;">
         <li style="margin-bottom: 10px;">Username: {{ username }}</li>
         <li style="margin-bottom: 10px;">Email: Not shown (for security)</li>
     </ul>
     <a href="{{ url_for('logout') }}" style="
-        background-color: #ff0000;
+        background-color: #1877f2;
         color: #fff;
         border: none;
         padding: 10px 20px;
         text-transform: uppercase;
         letter-spacing: 2px;
         cursor: pointer;
-        border-radius: 4px;
+        border-radius: 5px;
         transition: all 0.3s ease;
     ">Logout</a>
 </div>
