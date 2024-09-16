@@ -1,20 +1,27 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>Welcome, {{ username }}!</h2>
-<p>Your Profile:</p>
-<ul>
-    <li>Username: {{ username }}</li>
-    <li>Email: Not shown (for security)</li>
-</ul>
-<a href="{{ url_for('logout') }}">Logout</a>
-{% if flash %}
-<div class="flash">
-    {% if flash.type == 'error' %}
-    <span style="color: red;">{{ flash.message }}</span>
-    {% else %}
-    <span style="color: green;">{{ flash.message }}</span>
-    {% endif %}
+<div style="
+    background-image: url('path/to/gotham-city-background.jpg');
+    background-size: cover;
+    background-position: center;
+">
+    <h2 style="color: #ff0000; text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5); font-size: 36px;">Welcome, {{ username }}!</h2>
+    <p>Your Profile:</p>
+    <ul style="color: #fff; list-style-type: none; padding-left: 0; margin-bottom: 20px;">
+        <li style="margin-bottom: 10px;">Username: {{ username }}</li>
+        <li style="margin-bottom: 10px;">Email: Not shown (for security)</li>
+    </ul>
+    <a href="{{ url_for('logout') }}" style="
+        background-color: #ff0000;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        cursor: pointer;
+        border-radius: 4px;
+        transition: all 0.3s ease;
+    ">Logout</a>
 </div>
-{% endif %}
 {% endblock %}

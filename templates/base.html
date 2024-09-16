@@ -6,59 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Form Menia</title>
     <style>
-        /* Existing styles remain unchanged */
         body {
+            background-color: #000;
+            color: #fff;
             font-family: Arial, sans-serif;
-            line-height: 1.6;
             margin: 0;
             padding: 20px;
         }
 
-        h1,
-        h2,
-        h3 {
-            color: #333;
-        }
-
-        form {
-            max-width: 400px;
-            margin: 0 auto;
-        }
-
-        input[type="text"],
-        input[type="email"],
-        input[type="password"] {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
-        button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 12px 20px;
-            border: none;
-            cursor: pointer;
-            border-radius: 4px;
-        }
-
-        button:hover {
-            background-color: #45a049;
-        }
-
-        .flash {
-            background-color: #f44336;
-            color: white;
-            padding: 10px;
-            text-align: center;
-        }
-
-        /* New styles for navbar */
         nav {
             background-color: #333;
-            color: white;
+            color: #fff;
             padding: 1rem;
             display: flex;
             justify-content: space-between;
@@ -85,7 +43,6 @@
             color: lightgray;
         }
 
-        /* New styles for footer */
         footer {
             position: fixed;
             bottom: 0;
@@ -101,7 +58,7 @@
 
 <body>
     <nav>
-        <h2>Form Menia</h2>
+        <h2 style="color: #ff0000;">Form Menia</h2>
         <ul>
             {% if session.logged_in %}
             <li><a href="{{ url_for('home') }}">Home</a></li>

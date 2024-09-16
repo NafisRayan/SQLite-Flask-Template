@@ -1,9 +1,22 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Welcome to Form Menia</h1>
-<p>This is the homepage of Form Menia.</p>
-
-<p><a href="{{ url_for('login') }}">Login</a></p>
-<p><a href="{{ url_for('register') }}">Register</a></p>
+<div style="
+    background-image: url('path/to/gotham-city-background.jpg');
+    background-size: cover;
+    background-position: center;
+">
+    <h1 style="color: #ff0000; text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5); font-size: 48px;">Welcome to Form Menia</h1>
+    <p style="color: #fff; text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.3); font-size: 24px;">This is the homepage of Form Menia.</p>
+    <button style="
+        background-color: #ff0000;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    ">Explore</button>
+</div>
 {% endblock %}
