@@ -26,13 +26,24 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        # Check if credentials are valid
+
+        # Check credentials
         if check_credentials(username, password):
             session['logged_in'] = True
             session['username'] = username
-            return redirect(url_for('profile'))  # Redirect to profile after successful login
+            return redirect(url_for('profile'))
         else:
-            flash('Invalid credentials', 'error')
+            conn = sqlite3.connect('users.db')
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM users WHERE username=?", (username,))
+            existing_user = cursor.fetchone()
+            conn.close()
+
+            if existing_user is None:
+                flash('Username does not exist', 'error')
+            else:
+                flash('Incorrect password', 'error')
+
     return render_template('login.html')
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -42,16 +53,35 @@ def register():
         email = request.form['email']
         password = request.form['password']
         confirm_password = request.form['confirm_password']
-        # Check if passwords match and validate other fields
+
+        # Check if passwords match
         if password != confirm_password:
             flash('Passwords don\'t match', 'error')
         elif not validate_email(email):
             flash('Invalid email address', 'error')
         else:
-            # Add user to database
-            add_user_to_db(username, email, password)
-            flash('Registration successful!', 'success')
-            return redirect(url_for('login'))  # Redirect to login after successful registration
+            # Check if user already exists
+            conn = sqlite3.connect('users.db')
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM users WHERE username=? OR email=?", (username, email))
+            existing_user = cursor.fetchone()
+            conn.close()
+
+            if existing_user:
+                if existing_user[1] == username:
+                    flash('User with this username already exists.', 'error')
+                else:
+                    flash('User with this email address already exists.', 'error')
+                print("Flash message set:", session.get('_flashes'))
+                return render_template('register.html')  # Re-render the form
+            else:
+                # Add user to database
+                add_user_to_db(username, email, password)
+                flash('Registration successful!', 'success')
+                print("Flash message set:", session.get('_flashes'))
+                return redirect(url_for('login'))
+
+    print("No POST request, rendering register page")
     return render_template('register.html')
 
 @app.route('/profile')
@@ -82,9 +112,21 @@ def check_credentials(username, password):
 def add_user_to_db(username, email, password):
     conn = sqlite3.connect('users.db')
     cursor = conn.cursor()
-    cursor.execute("INSERT INTO users (username, email, password) VALUES (?, ?, ?)",
-                  (username, email, password))
-    conn.commit()
+    
+    # Check if the username or email already exists
+    cursor.execute("SELECT * FROM users WHERE username=? OR email=?", (username, email))
+    existing_user = cursor.fetchone()
+    
+    if existing_user:
+        if existing_user[1] == username:
+            flash('User with this username already exists.', 'error')
+        else:
+            flash('User with this email address already exists.', 'error')
+    else:
+        cursor.execute("INSERT INTO users (username, email, password) VALUES (?, ?, ?)",
+                      (username, email, password))
+        conn.commit()
+    
     conn.close()
 
 def validate_email(email):
